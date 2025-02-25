@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOCREAM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color:  #ffffff;
+        }
+        header {
+            background-color: #c4f082;
+            color:  #201e1e.;
+            text-align: center;
+            padding: 20px 0;
+        }
+        h1 {
+            margin: 0;
+        }
+        nav {
+            background-color: #333;
+            overflow: hidden;
+            text-align: center; /* Centrar los botones */
+        }
+        nav a {
+            color: rgb(255, 254, 254);
+            padding: 14px 20px;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: #f3ebeb;
+            color: rgb(255, 255, 255);
+            transform: scale(1.2); /* Aumenta el tamaño del botón */
+        }
+        .container {
+            padding: 20px;
+        }
+        .section-title {
+            color: #2e2323;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+       
+
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 10px 0;
+            background-color: white;
+            cursor: pointer;
+        }
+        .product-card h3 {
+            color: #75db93;
+        }
+        .footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .tab-content {
+            display: none;
+        }
+        .active {
+            display: block;
+        }
+        /* Estilos para el modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+            padding-top: 60px;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: rgb(0, 0, 0);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        img.product-image {
+            width: 100%;
+            height: auto;
+        }
+        .contact-info p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        /* Estilo para el botón */
+        .contact-button {
+            background-color: #a3d7a5;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            text-align: center;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+        .contact-button:hover {
+            background-color: #75ca8a;
+            transform: scale(1.1);
+        }
+        /* Estilo para el nuevo botón "¿Cómo trabajamos?" */
+        .working-button {
+            background-color: #498774;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            text-align: center;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+        .working-button:hover {
+            background-color: #66adaf;
+            transform: scale(1.1);
+        }
+        .working-description {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #e3f2fd;
+            border: 1px solid #599288;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<script>
+    const fondos = [
+        "1jpg",
+        "fondo2.jpg",
+        "fondo3.jpg"
+    ]; // Lista de nombres de tus imágenes de fondo
+    let indiceFondo = 0;
+
+    function cambiarFondo() {
+        document.body.style.backgroundImage = `url('${fondos[indiceFondo]}')`;
+        indiceFondo = (indiceFondo + 1) % fondos.length; // Cambia al siguiente fondo, vuelve al primero si es el último
+    }
+
+    // Cambiar el fondo cada 5 segundos (5000 milisegundos)
+    setInterval(cambiarFondo, 5000);
+
+    // Cambiar el fondo inmediatamente al cargar la página
+    cambiarFondo();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOCREAM</title>
+    <style>
+        /* ... (tu código CSS) ... */
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ECOCREAM</h1>
+        <p>TESLA</p>
+    </header>
+
+    <nav>
+        <a href="javascript:void(0)" onclick="showTab('productos')">Productos</a>
+        <a href="javascript:void(0)" onclick="showTab('sobre-nosotros')">Sobre Nosotros</a>
+        <a href="javascript:void(0)" onclick="showTab('contacto')">Contacto</a>
+    </nav>
+
+    <div class="container">
+        <section id="productos" class="tab-content">
+            <h2 class="section-title">Productos a la venta</h2>
+
+            <div class="product-card" onclick="openModal('aguaFresa')">
+                <h3>Parches Desinflamatorios</h3>
+                <p>Parches desinflamatorios 100% naturales hechos a mano con yerbas curativas por por tan solo.</p>
+                <p><strong>Precio:</strong> $25.000</p>
+            </div>
+
+            <div class="product-card" onclick="openModal('aguaPepinoMenta')">
+                <h3>Frio Gel</h3>
+                <p>El producto desinflama de manera dermica y muscular, mejorando la produccion de vasos sanguineos.El tarro contiene 120g.</p>
+                <p><strong>Precio:</strong> $20.000 mil</p>
+            </div>
+
+            
+        </section>
+
+        <section id="sobre-nosotros" class="tab-content">
+            <h2 class="section-title">Sobre Nosotros</h2>
+            <p>En ECOCREAM, nos dedicamos a la elaboración artesanal de productos terapéuticos 100% naturales,
+                 diseñados para promover el bienestar y el cuidado de la piel.
+                  Nuestra filosofía se basa en el respeto por la naturaleza y el aprovechamiento de sus bondades, por lo que utilizamos ingredientes de la más alta calidad, cultivados de forma sostenible y cosechados a mano por los estudiantes de tesla. </p>
+            
+
+            <!-- Botón "¿Cómo lo hacemos?" -->
+            <button class="working-button" onclick="showWorkingInfo()">¿Como lo hacemos?</button>
+            
+            <!-- Descripción que se muestra al hacer clic en el botón -->
+            <div id="working-info" class="working-description">
+                <p>Las hierbas medicinales que empleamos en nuestras formulaciones provienen de nuestra huerta escolar, donde son cultivadas con dedicación y esmero por estudiantes comprometidos con el medio ambiente.
+                    Este enfoque nos permite garantizar la frescura y pureza de nuestros ingredientes, así como fomentar la educación y la conciencia ecológica en las nuevas generaciones.
+                    .</p>
+            </div>
+        </section>
+
+        <section id="contacto" class="tab-content">
+            <h2 class="section-title">Contactos</h2>
+            <div class="contact-info">
+                <p><strong>Nombre:</strong> ECOCREAM</p>
+                <p><strong>Correo Electrónico:</strong> <a href="mailto:ecocream30@gmail.com">ecocream30@gmail.com</a></p>
+                <p><strong>Teléfono:</strong> +3008806857</p>
+            </div>
+            <!-- Botón "!Comunícate con nosotros que esperas¡" -->
+            <a href="mailto:ecocream30@gmail.com" class="contact-button">! Comunícate con nosotros que esperas ¡</a>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 ECOCREAM. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function showTab(tabId) {
+            // Oculta todas las secciones
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Muestra la sección seleccionada
+            const activeTab = document.getElementById(tabId);
+            activeTab.classList.add('active');
+        }
+
+        // Mostrar la sección de productos por defecto al cargar la página
+        window.onload = function() {
+            showTab('productos');
+        }
+
+        // Mostrar la información sobre cómo trabajamos
+        function showWorkingInfo() {
+            const info = document.getElementById("working-info");
+            // Cambia la visibilidad de la descripción
+            if (info.style.display === "none" || info.style.display === "") {
+                info.style.display = "block";
+            } else {
+                info.style.display = "none";
+            }
+        }
+    </script>
+
+</body>
+</html>
